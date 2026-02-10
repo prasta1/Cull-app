@@ -277,6 +277,8 @@ final class ScanViewModel {
         if !deletedIDs.isEmpty {
             if let index = duplicateGroups.firstIndex(where: { $0.id == group.id }) {
                 duplicateGroups[index].files.removeAll { deletedIDs.contains($0.id) }
+                // Remove deleted files from selection to keep other selections persistent
+                selectedFilesToDelete.subtract(deletedIDs)
                 if duplicateGroups[index].files.count <= 1 {
                     duplicateGroups.remove(at: index)
                     selectedGroup = nil
@@ -286,7 +288,6 @@ final class ScanViewModel {
             }
         }
 
-        selectedFilesToDelete = []
         isDeleting = false
     }
 

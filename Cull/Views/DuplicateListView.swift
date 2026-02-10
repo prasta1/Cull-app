@@ -8,7 +8,6 @@ struct DuplicateListView: View {
             get: { viewModel.selectedGroup?.id },
             set: { id in
                 viewModel.selectedGroup = viewModel.duplicateGroups.first { $0.id == id }
-                // viewModel.selectedFilesToDelete = []
             }
         )) { group in
             DuplicateGroupRow(group: group)
